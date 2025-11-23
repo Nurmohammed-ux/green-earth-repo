@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title & Logo -->
+    <title>Green Earth</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/hero-leaf1.png"
+      type="image/x-icon"
+    />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Tailwind & DaisyUi -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sm:w-[375px] md:w-[1920px] mx-auto">
+    <!-- Navbar -->
+    <header>
+      <div
+        class="navbar bg-[#166534] shadow-sm px-4 py-3 md:px-[135px] md:py-[36.52px] flex items-center"
+      >
+        <!-- LEFT -->
+        <div class="navbar-start">
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </div>
+
+            <ul
+              tabindex="-1"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-56 p-2 shadow"
+            >
+              <li class="text-xl font-medium"><a>About</a></li>
+              <li class="text-xl font-medium"><a>Gallery</a></li>
+              <li class="text-xl font-medium"><a>Plant a Tree</a></li>
+            </ul>
+          </div>
+
+          <a
+            class="btn btn-ghost text-2xl md:text-3xl text-white font-semibold hover:text-[#166534] rounded-lg"
+          >
+            Green Earth
+          </a>
+        </div>
+
+        <!-- CENTER MENU (Desktop) -->
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal text-white text-xl px-4">
+            <li class="hover:bg-white hover:text-[#166534] mr-3 rounded-2xl">
+              <a>About</a>
+            </li>
+            <li class="hover:bg-white hover:text-[#166534] mr-3 rounded-2xl">
+              <a>Gallery</a>
+            </li>
+            <li class="hover:bg-white hover:text-[#166534] mr-3 rounded-2xl">
+              <a>Plant a Tree</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- RIGHT BUTTON -->
+        <div class="navbar-end">
+          <a
+            class="btn bg-[#FACC15] hover:bg-white border-0 md:text-lg sm:text-base sm:px-2 md:px-4 py-2 rounded-full"
+          >
+            Plant a Tree
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class=" bg-[#15803D10]">
+      <!-- Hero Section -->
+      <section
+        class="bg-[#CFF0DC] flex flex-col gap-7 md:flex-row justify-around items-center text-center md:text-left px-4 py-10"
+      >
+        <div>
+          <img src="./assets/hero-leaf1.png" alt="Image" />
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <h1 class="text-6xl font-extrabold mb-7">
+            Plant a Tree, Grow a Future
+          </h1>
+          <p class="text-[22px] text-gray-600 font-normal px-[22px] mb-6">
+            Join our mission to plant 1 million trees and make the Earth greener
+            for future generations.
+          </p>
+          <a
+            class="btn bg-[#FACC15] hover:bg-white border-0 text-xl font-medium text-[#166534] px-5 py-3 rounded-full"
+            >Get Involved</a
+          >
+        </div>
+        <div>
+          <img src="./assets/hero-leaf2.png" alt="Image" />
+        </div>
+      </section>
+
+      <!-- Choose Trees Section -->
+      <section class="mt-[100px] flex flex-col mx-10 md:mx-[135px] pb-24">
+        <h2 class="text-[40px] text-center font-bold mb-10 tracking-wide">
+          Choose Your Trees
+        </h2>
+        <!-- spinner div -->
+        <div
+        id="spinner"
+        class="flex justify-center items-center py-10 hidden"
+      >
+        <span class="loading loading-bars loading-xl"></span>
+      </div>
+        <div id="initial-message" class="bg-white md:w-1/2 text-center md:mx-auto mb-8 p-4 md:mb-4 rounded-2xl">
+              <h4 class="text-2xl mb-3">You haven't selected a category yet.</h4>
+              <h5 class="text-3xl font-bold">You have to select a category !</h5>
+        </div>
+        <div class="flex flex-col justify-center items-center md:items-start md:flex-row gap-[30px]">
+          <aside class="w-[250px] pl-14 md:pl-0">
+            <h3 class="text-2xl font-semibold mb-4">Categories</h3>
+            <a href="" class="text-2xl pl-2 md:pr-[150px] py-1 hover:bg-[#166534] hover:text-white rounded-lg">All Trees</a>
+            <div id="all-categories"></div>
+          </aside>
+          <div id="category-trees" class="grid grid-cols-1 md:grid-cols-3 gap-[30px] md:w-[1090px] rounded-xl">
+            
+          </div>
+          <aside class="border-2 border-red-500 w-[250px] h-[200px]"></aside>
+        </div>
+      </section>
+    </main>
+
+
+    <script src="./index.js"></script>
+  </body>
+</html>
