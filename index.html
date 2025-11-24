@@ -68,7 +68,7 @@
           </div>
 
           <a
-            class="btn btn-ghost text-2xl md:text-3xl text-white font-semibold hover:text-[#166534] rounded-lg"
+            class="btn btn-ghost text-2xl md:text-3xl text-white font-semibold hover:bg-[#CFF0DC] hover:text-[#166534] rounded-lg"
           >
             Green Earth
           </a>
@@ -77,13 +77,19 @@
         <!-- CENTER MENU (Desktop) -->
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal text-white text-xl px-4">
-            <li class="hover:bg-white hover:text-[#166534] mr-3 rounded-2xl">
+            <li
+              class="hover:bg-[#CFF0DC] hover:text-[#166534] mr-3 rounded-2xl"
+            >
               <a>About</a>
             </li>
-            <li class="hover:bg-white hover:text-[#166534] mr-3 rounded-2xl">
+            <li
+              class="hover:bg-[#CFF0DC] hover:text-[#166534] mr-3 rounded-2xl"
+            >
               <a>Gallery</a>
             </li>
-            <li class="hover:bg-white hover:text-[#166534] mr-3 rounded-2xl">
+            <li
+              class="hover:bg-[#CFF0DC] hover:text-[#166534] mr-3 rounded-2xl"
+            >
               <a>Plant a Tree</a>
             </li>
           </ul>
@@ -92,7 +98,7 @@
         <!-- RIGHT BUTTON -->
         <div class="navbar-end">
           <a
-            class="btn bg-[#FACC15] hover:bg-white border-0 md:text-lg sm:text-base sm:px-2 md:px-4 py-2 rounded-full"
+            class="btn bg-[#FACC15] hover:bg-[#CFF0DC] border-0 md:text-lg sm:text-base sm:px-2 md:px-4 py-2 rounded-full"
           >
             Plant a Tree
           </a>
@@ -100,7 +106,7 @@
       </div>
     </header>
 
-    <main class=" bg-[#15803D10]">
+    <main class="bg-[#15803D10]">
       <!-- Hero Section -->
       <section
         class="bg-[#CFF0DC] flex flex-col gap-7 md:flex-row justify-around items-center text-center md:text-left px-4 py-10"
@@ -117,7 +123,7 @@
             for future generations.
           </p>
           <a
-            class="btn bg-[#FACC15] hover:bg-white border-0 text-xl font-medium text-[#166534] px-5 py-3 rounded-full"
+            class="btn bg-[#FACC15] hover:bg-[#CFF0DC] border-0 hover:border-2 hover:border-[#166534] text-xl font-medium text-[#166534] px-5 py-3 rounded-full"
             >Get Involved</a
           >
         </div>
@@ -132,30 +138,55 @@
           Choose Your Trees
         </h2>
         <!-- spinner div -->
-        <div
-        id="spinner"
-        class="flex justify-center items-center py-10 hidden"
-      >
-        <span class="loading loading-bars loading-xl"></span>
-      </div>
-        <div id="initial-message" class="bg-white md:w-1/2 text-center md:mx-auto mb-8 p-4 md:mb-4 rounded-2xl">
-              <h4 class="text-2xl mb-3">You haven't selected a category yet.</h4>
-              <h5 class="text-3xl font-bold">You have to select a category !</h5>
+        <div id="spinner" class="flex justify-center items-center py-10 hidden">
+          <span class="loading loading-bars loading-xl"></span>
         </div>
-        <div class="flex flex-col justify-center items-center md:items-start md:flex-row gap-[30px]">
+        <div
+          id="initial-message"
+          class="bg-white md:w-1/2 text-center md:mx-auto mb-8 p-4 md:mb-4 rounded-2xl"
+        >
+          <h4 class="text-2xl mb-3">You haven't selected a category yet.</h4>
+          <h5 class="text-3xl font-bold">You have to select a category !</h5>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center md:items-start md:flex-row gap-[30px]"
+        >
           <aside class="w-[250px] pl-14 md:pl-0">
             <h3 class="text-2xl font-semibold mb-4">Categories</h3>
-            <a href="" class="text-2xl pl-2 md:pr-[150px] py-1 hover:bg-[#166534] hover:text-white rounded-lg">All Trees</a>
+            <a
+              href=""
+              class="text-2xl pl-2 md:pr-[150px] py-1 hover:bg-[#166534] hover:text-white rounded-lg"
+              >All Trees</a
+            >
             <div id="all-categories"></div>
           </aside>
-          <div id="category-trees" class="grid grid-cols-1 md:grid-cols-3 gap-[30px] md:w-[1090px] rounded-xl">
-            
-          </div>
-          <aside class="border-2 border-red-500 w-[250px] h-[200px]"></aside>
+          <div
+            id="category-trees"
+            class="grid grid-cols-1 md:grid-cols-3 gap-[30px] md:w-[1090px] rounded-xl"
+          ></div>
+          <aside
+            class="border-2 border-red-500 bg-white w-[250px] p-4 rounded-3xl"
+          >
+            <h2 class="text-[28px] font-semibold">Your Cart</h2>
+          </aside>
         </div>
       </section>
     </main>
 
+    <!-- Open the modal using ID.showModal() method -->
+    <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+    <dialog id="tree_modal" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">Hello!</h3>
+        <p class="py-4">Press ESC key or click the button below to close</p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 
     <script src="./index.js"></script>
   </body>

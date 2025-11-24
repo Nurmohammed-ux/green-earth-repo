@@ -29,13 +29,37 @@ const loadAllCategories = () => {
 // "price": 500
 // },
 
+
 const loadCategoryTrees = (id) => {
   manageSpinner(true);
   const url = `https://openapi.programming-hero.com/api/category/${id}`;
   fetch(url)
     .then((response) => response.json())
-    .then((json) => displayCategoryTrees(json.plants));
+    .then((json) => {
+      document.querySelectorAll(".category-btn").forEach(btn => {
+        btn.classList.remove("active");
+      });
+      
+      const categoryBtn = document.getElementById(`category-btn-${id}`);
+      categoryBtn.classList.add("active");
+      displayCategoryTrees(json.plants)
+    });
 };
+
+
+const loadTreeDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+  const response = await fetch(url);
+  const details = await response.json();
+  displayTreeDetails(details.plants);
+}
+
+const displayTreeDetails = (plant) => {
+  console.log(plant);
+  const detailsBox = document.createElement("div");
+  detailsBox.innerHTML = ``;
+} 
+
 
 const displayCategoryTrees = (plants) => {
   
@@ -48,7 +72,7 @@ const displayCategoryTrees = (plants) => {
   plants.forEach((plant) => {
     const card = document.createElement("div");
     card.innerHTML = `
-                    <div class="bg-white md:w-[343.33px] p-4 rounded-xl h-full flex flex-col">
+                    <div onclick="loadTreeDetails(${plant.id})" class="bg-white md:w-[343.33px] p-4 rounded-xl h-full flex flex-col">
               <img class="w-full h-[250px] mb-4 rounded-xl" src="${plant.image}" alt="image">
               <h3 class="text-xl font-semibold mb-3">${plant.name}</h3>
               <p class="text-base font-medium text-gray-600 my-3">${plant.description}</p>
@@ -74,8 +98,8 @@ const displayAllCategories = (categories) => {
     const categoriesDiv = document.createElement("div");
 
     categoriesDiv.innerHTML = `
-      <h6 onclick="loadCategoryTrees('${category.id}')"
-          class="text-2xl pl-2 py-1 my-2 hover:bg-[#166534] hover:text-white rounded-lg">
+                 <h6 id="category-btn-${category.id}"        onclick="loadCategoryTrees('${category.id}')"
+          class="text-2xl pl-2 py-1 my-2 hover:bg-[#166534] hover:text-white rounded-lg category-btn">
 
           ${category.category_name}
       </h6>
