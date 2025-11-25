@@ -73,6 +73,55 @@ const displayTreeDetails = (plant) => {
    document.getElementById("tree_modal").showModal();
 };
 
+let cart = [];
+const loadCart = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+  const response = await fetch(url);
+  const cartDetails = await response.json();
+  const plant = cartDetails.plants;
+
+  const existing = cart.find(item => item.id === plant.id);
+  if(existing) {
+    existing.quantity += 1;
+  }
+  else {
+    cart.push({...plant, quantity: 1})
+  }
+  displayCart();
+}
+
+const displayCart = () => {
+  
+  const cartContainer = document.getElementById("cart-container");
+  const cartTotal = document.getElementById("cart-total");
+  cartContainer.innerHTML = "";
+
+  let totalPrice = 0;
+
+  cart.forEach((item, index) => {
+    totalPrice += item.price * item.quantity;
+    const cartDiv = document.createElement("div");
+    cartDiv.innerHTML = `
+                      <div class="bg-[#15803D10] flex justify-between items-center mb-3 p-4 rounded-3xl">
+                <div>
+                  <h4 class="text-xl font-medium mb-2">${item.name}</h4>
+                  <p class="text-xl text-gray-600"><span class="text-2xl">৳</span>${item.price} x ${item.quantity}</p>
+                </div>
+                <a class="btn border-none text-2xl cursor-pointer">x</a>
+              </div>
+  
+  `;
+  cartDiv.querySelector("a").addEventListener("click", () => {
+    cart.splice(index, 1);
+    displayCart();
+  });
+
+  cartContainer.appendChild(cartDiv);
+  });
+  
+  cartTotal.innerText = `Total: ৳ ${totalPrice}`;
+}
+
 const displayCategoryTrees = (plants) => {
   const categoryTreesContainer = document.getElementById("category-trees");
   document.getElementById("initial-message").style.display = "none";
@@ -91,15 +140,16 @@ const displayCategoryTrees = (plants) => {
 
           <div class="flex justify-between mb-3">
             <p class="bg-[#16653420] text-[#166534] font-medium px-3 rounded-full">${plant.category}</p>
-            <p class="font-bold">৳ ${plant.price}</p>
+            <p class="font-bold"><span class="font-extrabold">৳</span> ${plant.price}</p>
           </div>
 
-          <button class="bg-[#15803D] text-white font-semibold hover:bg-[#16653420] hover:text-[#15803D] px-22 md:px-[111.17px] mt-auto py-3 rounded-full">
+          <button onclick="event.stopPropagation(); loadCart(${plant.id})" class="bg-[#15803D] text-white font-semibold hover:bg-[#16653420] hover:text-[#15803D] px-22 md:px-[111.17px] mt-auto py-3 rounded-full">
             Add to Cart
           </button>
         </div>
     `;
 
+    // Modal click handler
     card.addEventListener("click", () => {
       loadTreeDetails(plant.id);
     })
@@ -109,6 +159,7 @@ const displayCategoryTrees = (plants) => {
 
   manageSpinner(false);
 };
+
 
 const displayAllCategories = (categories) => {
   const AllCategories = document.getElementById("all-categories");
