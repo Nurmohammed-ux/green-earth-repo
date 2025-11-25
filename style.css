@@ -4,5 +4,8 @@
 
 }
 
+#tree_modal {
+  z-index: 99999 !important;
+}
 
 @import "tailwindcss";

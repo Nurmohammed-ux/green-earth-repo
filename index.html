@@ -162,7 +162,7 @@
           </aside>
           <div
             id="category-trees"
-            class="grid grid-cols-1 md:grid-cols-3 gap-[30px] md:w-[1090px] rounded-xl"
+            class="grid grid-cols-1 md:grid-cols-3 gap-[30px] md:w-[1090px] rounded-xl items-stretch"
           ></div>
           <aside
             class="border-2 border-red-500 bg-white w-[250px] p-4 rounded-3xl"
@@ -174,19 +174,20 @@
     </main>
 
     <!-- Open the modal using ID.showModal() method -->
-    <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
     <dialog id="tree_modal" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
-        <h3 class="text-lg font-bold">Hello!</h3>
-        <p class="py-4">Press ESC key or click the button below to close</p>
-        <div class="modal-action">
+        <div id="details-container">
+        </div>
+        <div class="modal-action flex justify-center">
           <form method="dialog">
             <!-- if there is a button in form, it will close the modal -->
-            <button class="btn">Close</button>
+            <button class="btn border-none bg-[#15803D] text-xl text-white font-semibold hover:bg-[#16653420] hover:text-[#15803D] px-22 md:px-[200px] mt-auto py-3 rounded-full">Close</button>
           </form>
         </div>
       </div>
     </dialog>
+    
 
     <script src="./index.js"></script>
   </body>
