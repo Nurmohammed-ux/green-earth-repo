@@ -26,7 +26,7 @@
 
                      ii) const hi = () => 'Hi!'; // No Parameters
 
-5.  How does destructuring assignment work in ES6?
+4.  How does destructuring assignment work in ES6?
 
     Answer:  Destructuring assignment is a powerful feature introduced in ES6 (ECMAScript 2015) that allows you to unpack values from arrays or properties or key-value from objects into distinct variables. It provides a more readable and concise way to extract data.
              There are two prominent types of destructuring: Array Destructuring and Object Destructuring.
@@ -56,5 +56,16 @@
                         console.log(age);       // Output: 30
                         // console.log(lastName); // ReferenceError, unless it was also destructured
 
+5.   Explain template literals in ES6. How are they different from string concatenation?
+     Answer:  Template literals, introduced in ES6 (ECMAScript 2015), are a modern way to create strings in JavaScript. They offer significant improvements over traditional string methods, primarily in handling variable interpolation and multi-line strings.
+              Template literals are enclosed by backticks ( ` ` ) instead of single or double quotes.The most powerful feature is expression interpolation, which allows you to embed variables or expressions directly into the string using the placeholder syntax                         ${expression}.
 
+              Example: const name = "Bijoy";
+                       const age = 23;
+
+                       // Using a template literal
+                       const greeting = `Hello, my name is ${name} and I am ${age} years old.`;
+
+                       console.log(greeting);
+                       // Output: Hello, my name is Bijoy and I am 23 years old.
     
