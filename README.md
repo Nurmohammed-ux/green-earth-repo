@@ -57,6 +57,7 @@
                         // console.log(lastName); // ReferenceError, unless it was also destructured
 
 5.   Explain template literals in ES6. How are they different from string concatenation?
+   
      Answer:  Template literals, introduced in ES6 (ECMAScript 2015), are a modern way to create strings in JavaScript. They offer significant improvements over traditional string methods, primarily in handling variable interpolation and multi-line strings.
               Template literals are enclosed by backticks ( ` ` ) instead of single or double quotes.The most powerful feature is expression interpolation, which allows you to embed variables or expressions directly into the string using the placeholder syntax                         ${expression}.
 
