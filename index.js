@@ -8,24 +8,36 @@ const manageSpinner = (status) => {
   }
 };
 
+const removeActive = () => {
+  document.querySelectorAll(".category-btn").forEach((btn) => {
+    btn.classList.remove("active");
+  });
+};
+
+const loadAllTrees = () => {
+  const url = "https://openapi.programming-hero.com/api/plants";
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      removeActive();
+      const allTreesBtn = document.getElementById("all-trees-btn");
+      if (allTreesBtn) {
+        allTreesBtn.classList.add("active");
+      }
+      displayCategoryTrees(data.plants);
+    });
+};
+
 const loadAllCategories = () => {
   const url = "https://openapi.programming-hero.com/api/categories";
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      console.log(json.categories);
+      // console.log(json.categories);
       displayAllCategories(json.categories);
     });
 };
 
-// {
-// "id": 1,
-// "image": "https://i.ibb.co.com/cSQdg7tf/mango-min.jpg",
-// "name": "Mango Tree",
-// "description": "A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green canopy offers shade, while its sweet fruits are rich in vitamins and minerals.",
-// "category": "Fruit Tree",
-// "price": 500
-// },
 
 const loadCategoryTrees = (id) => {
   manageSpinner(true);
@@ -33,9 +45,7 @@ const loadCategoryTrees = (id) => {
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      document.querySelectorAll(".category-btn").forEach((btn) => {
-        btn.classList.remove("active");
-      });
+      removeActive();
 
       const categoryBtn = document.getElementById(`category-btn-${id}`);
       categoryBtn.classList.add("active");
@@ -50,14 +60,13 @@ const loadTreeDetails = async (id) => {
   displayTreeDetails(details.plants);
 };
 
-
 const displayTreeDetails = (plant) => {
-  console.log(plant);
+  // console.log(plant);
 
-   const detailsBox = document.getElementById("details-container");
-   detailsBox.innerHTML = `
+  const detailsBox = document.getElementById("details-container");
+  detailsBox.innerHTML = `
                          <div class="bg-[#EDF7FF40] border-3 border-[#EDF7FF] p-6 rounded-3xl">
-                         <img class="w-full h-[300px] mb-4 rounded-xl" src="${plant.image}" alt="image">              
+                         <img class="w-full h-[350px] mb-4 rounded-xl" src="${plant.image}" alt="image">              
                          <h2 class="text-4xl font-semibold mb-7">${plant.name}</h2>
                          <p class="text-2xl font-semibold mb-2.5">Description</p>
                          <p class="text-xl text-gray-700 mb-6">${plant.description}</p>
@@ -70,7 +79,7 @@ const displayTreeDetails = (plant) => {
                          </div>
   
    `;
-   document.getElementById("tree_modal").showModal();
+  document.getElementById("tree_modal").showModal();
 };
 
 let cart = [];
@@ -80,18 +89,16 @@ const loadCart = async (id) => {
   const cartDetails = await response.json();
   const plant = cartDetails.plants;
 
-  const existing = cart.find(item => item.id === plant.id);
-  if(existing) {
+  const existing = cart.find((item) => item.id === plant.id);
+  if (existing) {
     existing.quantity += 1;
-  }
-  else {
-    cart.push({...plant, quantity: 1})
+  } else {
+    cart.push({ ...plant, quantity: 1 });
   }
   displayCart();
-}
+};
 
 const displayCart = () => {
-  
   const cartContainer = document.getElementById("cart-container");
   const cartTotal = document.getElementById("cart-total");
   cartContainer.innerHTML = "";
@@ -111,20 +118,19 @@ const displayCart = () => {
               </div>
   
   `;
-  cartDiv.querySelector("a").addEventListener("click", () => {
-    cart.splice(index, 1);
-    displayCart();
+    cartDiv.querySelector("a").addEventListener("click", () => {
+      cart.splice(index, 1);
+      displayCart();
+    });
+
+    cartContainer.appendChild(cartDiv);
   });
 
-  cartContainer.appendChild(cartDiv);
-  });
-  
   cartTotal.innerText = `Total: ৳ ${totalPrice}`;
-}
+};
 
 const displayCategoryTrees = (plants) => {
   const categoryTreesContainer = document.getElementById("category-trees");
-  document.getElementById("initial-message").style.display = "none";
   categoryTreesContainer.innerHTML = "";
 
   plants.forEach((plant) => {
@@ -133,12 +139,12 @@ const displayCategoryTrees = (plants) => {
     card.innerHTML = `
         <div class="bg-white md:w-[343.33px] p-4 rounded-xl h-full flex flex-col cursor-pointer">
 
-          <img class="w-full h-[250px] mb-4 rounded-xl" src="${plant.image}" alt="${plant.name}">
-          <h3 class="text-xl font-semibold mb-3">${plant.name}</h3>
+          <img class="w-full h-[280px] mb-4 rounded-xl" src="${plant.image}" alt="${plant.name}">
+          <h3 onclick="loadTreeDetails(${plant.id})" class="text-xl font-semibold mb-3">${plant.name}</h3>
 
-          <p class="text-base font-medium text-gray-600 my-3">${plant.description}</p>
+          <p class="text-base font-medium text-gray-600 my-3 line-clamp-2">${plant.description}</p>
 
-          <div class="flex justify-between mb-3">
+          <div class="flex justify-between mt-3 mb-5">
             <p class="bg-[#16653420] text-[#166534] font-medium px-3 rounded-full">${plant.category}</p>
             <p class="font-bold"><span class="font-extrabold">৳</span> ${plant.price}</p>
           </div>
@@ -150,16 +156,15 @@ const displayCategoryTrees = (plants) => {
     `;
 
     // Modal click handler
-    card.addEventListener("click", () => {
-      loadTreeDetails(plant.id);
-    })
+    // card.addEventListener("click", () => {
+    //   loadTreeDetails(plant.id);
+    // });
 
     categoryTreesContainer.appendChild(card);
   });
 
   manageSpinner(false);
 };
-
 
 const displayAllCategories = (categories) => {
   const AllCategories = document.getElementById("all-categories");
@@ -180,4 +185,15 @@ const displayAllCategories = (categories) => {
   });
 };
 
+// Plant A Tree buttons (both mobile & desktop)
+document.querySelectorAll(".btn-plantTree").forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById("plantATree-section").scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+});
+
+loadAllTrees();
 loadAllCategories();

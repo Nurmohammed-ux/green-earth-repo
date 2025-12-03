@@ -59,11 +59,11 @@
 
             <ul
               tabindex="-1"
-              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-56 p-2 shadow"
+              class="menu menu-sm dropdown-content bg-base-200 text-[#166534] rounded-box z-50 mt-3 w-56 p-2 shadow"
             >
-              <li class="text-xl font-medium"><a>About</a></li>
-              <li class="text-xl font-medium"><a>Gallery</a></li>
-              <li class="text-xl font-medium"><a>Plant a Tree</a></li>
+              <li class="text-3xl font-semibold tracking-wide"><a>About</a></li>
+              <li class="text-3xl font-semibold tracking-wide"><a>Gallery</a></li>
+              <li class="text-3xl font-semibold tracking-wide btn-plantTree"><a>Plant a Tree</a></li>
             </ul>
           </div>
 
@@ -88,7 +88,7 @@
               <a>Gallery</a>
             </li>
             <li
-              class="hover:bg-[#CFF0DC] hover:text-[#166534] mr-3 rounded-2xl"
+              class="hover:bg-[#CFF0DC] hover:text-[#166534] mr-3 rounded-2xl btn-plantTree"
             >
               <a>Plant a Tree</a>
             </li>
@@ -98,7 +98,7 @@
         <!-- RIGHT BUTTON -->
         <div class="navbar-end">
           <a
-            class="btn bg-[#FACC15] hover:bg-[#CFF0DC] border-0 md:text-lg sm:text-base sm:px-2 md:px-4 py-2 rounded-full"
+            class="btn bg-[#FACC15] hover:bg-[#CFF0DC] border-0 md:text-lg sm:text-base sm:px-2 md:px-4 py-2 rounded-full btn-plantTree"
           >
             Plant a Tree
           </a>
@@ -141,23 +141,17 @@
         <div id="spinner" class="flex justify-center items-center py-10 hidden">
           <span class="loading loading-bars loading-xl"></span>
         </div>
-        <!-- Initial message div -->
-        <div
-          id="initial-message"
-          class="bg-white md:w-1/2 text-center md:mx-auto mb-8 p-4 md:mb-4 rounded-2xl"
-        >
-          <h4 class="text-2xl mb-3">You haven't selected a category yet.</h4>
-          <h5 class="text-3xl font-bold">You have to select a category !</h5>
-        </div>
         <!-- Category div -->
         <div
           class="flex flex-col justify-center items-center md:items-start md:flex-row gap-[30px]"
         >
           <aside class="w-[250px] pl-14 md:pl-0">
             <h3 class="text-2xl font-semibold mb-4">Categories</h3>
-            <a
-              href=""
-              class="text-2xl pl-2 md:pr-[150px] py-1 hover:bg-[#166534] hover:text-white rounded-lg"
+            <a 
+            id="all-trees-btn"
+             onclick="event.preventDefault(); loadAllTrees()"
+              href="#"
+              class="category-btn text-2xl pl-2 pr-24 md:pr-[150px] py-1 hover:bg-[#166534] hover:text-white rounded-lg"
               >All Trees</a
             >
             <div id="all-categories"></div>
@@ -225,7 +219,7 @@
       </section>
 
       <!-- Plant a tree section -->
-      <section class="bg-[#0b4e24] w-full py-[100px] flex flex-col justify-center items-center">
+      <section id="plantATree-section" class="bg-[#0b4e24] w-full py-[100px] flex flex-col justify-center items-center">
         <h2
           class="text-3xl text-white font-bold pb-10 tracking-wide"
         >
